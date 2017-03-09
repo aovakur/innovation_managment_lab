@@ -1,2 +1,5 @@
 # innovation_managment_lab
-python
+
+It's first lab of innovation management subject.
+
+Parsing Data
