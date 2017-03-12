@@ -1,5 +1,1 @@
-from pandas import read_csv
-f = open ('innovation_managment.csv')
-text = f.read()
-output=read_csv ('innovation_managment.csv', sep=';', encoding='cp1251')
-print(text)
+data = pd.read_csv(a, sep=';', decimal=',', encoding='cp1251', header=1)
