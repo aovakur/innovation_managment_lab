@@ -24,7 +24,6 @@ def salary():
     while 1:
         try:
             b=int(input('Введите зарплату н/час от 500 до 1500 = '))
-
             if (b>=500 and b<=1500):
                 print('Ставка заработной платы в размере',b,'принята')
                 return b
@@ -34,13 +33,12 @@ def salary():
 def rate_bank():
     while 1:
         try:
-            d=int(input(' Введи ставку рефинансирования ЦБ РФ от 5 до 15% годовых = '))
-            if (d<=15 and d>5):
+            d=int(input('Введи ставку рефинансирования ЦБ РФ от 5 до 15% годовых = '))
+            if (d<=15 and d>=5):
                 print('Ставка рефинансирования ЦБ РФ', d, 'принята')
                 return d
         except [IOError, Exception]:
             print('Введи корректное число')
-
 
 data=scv_data()
 b=salary()
@@ -57,11 +55,11 @@ for index, row in data.iterrows():
 #for row in data.iterrows():
  #   if (row[5]>max):
   #      max = row[5]
+#print (max)
 
-print(result)
+otvet=round(result)
 
-
-
+print('Стоимость проекта = ' ,otvet, 'рублей')
 
 
 
