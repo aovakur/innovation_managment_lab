@@ -4,11 +4,12 @@ import csv
 import sys
 
 result=0
-a=0
+b=[]
 num = 1
 d=0
-n =0
-max=0
+day=0
+tend_max=0
+tmin_min=200
 
 def scv_data():
     while 1:
@@ -40,26 +41,34 @@ def rate_bank():
         except [IOError, Exception]:
             print('Введи корректное число')
 
-data=scv_data()
-b=salary()
-d=rate_bank()
+data = scv_data()
+salary = salary()
+bank = rate_bank()
 
 for index, row in data.iterrows():
     row[4] = float(row[4].replace(' ', '')) # TendDS
     row[6] = float(row[6].replace(' ',''))  # Tш
     row[7] = float(row[7].replace(' ', '')) # Тпз
     row[14]= float(row[14].replace(' ', '')) #  КОЛds
-   # print(row[6],row[6],row[7],row[14]) # Вывод всех столбцов
-    result += (row[4] * (row[6] * row[14] + row[7])) # Результат
+    row[5] = float(row[5].replace(' ', ''))  # Тпз
 
-#for row in data.iterrows():
- #   if (row[5]>max):
-  #      max = row[5]
-#print (max)
+    if row[5]>tend_max:
+        tend_max=row[5]
 
-otvet=round(result)
+    if row[4] < tmin_min:
+        tmin_min = row[4]
 
-print('Стоимость проекта = ' ,otvet, 'рублей')
+    result += (row[4] * (row[6] * row[14] + row[7]*salary)) # Результат
+
+day=tend_max-tmin_min
+
+if day<365:
+    otvet=round(result)*bank
+
+print ('max дней  (tend_max) =', tend_max)
+print ('min дней  (tmin_min)=', tmin_min)
+print ('Итог дней', day)
+print('Стоимость проекта = ',otvet, 'рублей')
 
 
 
