@@ -1,3 +1,4 @@
+﻿
 ﻿import pandas as pd
 import numpy as np
 import csv
@@ -10,6 +11,11 @@ d=0
 day=0
 tend_max=0
 tmin_min=200
+
+data = scv_data()
+salary = salary()
+bank = rate_bank()
+
 
 def scv_data():
     while 1:
@@ -41,38 +47,22 @@ def rate_bank():
         except [IOError, Exception]:
             print('Введи корректное число')
 
-data = scv_data()
-salary = salary()
-bank = rate_bank()
-
 for index, row in data.iterrows():
-    row[4] = float(row[4].replace(' ', '')) # TendDS
-    row[6] = float(row[6].replace(' ',''))  # Tш
-    row[7] = float(row[7].replace(' ', '')) # Тпз
-    row[14]= float(row[14].replace(' ', '')) #  КОЛds
-    row[5] = float(row[5].replace(' ', ''))  # Тпз
+        row[4] = float(row[4].replace(' ', '')) # TendDS
+        row[6] = float(row[6].replace(' ',''))  # Tш
+        row[7] = float(row[7].replace(' ', '')) # Тпз
+        row[14]= float(row[14].replace(' ', '')) #  КОЛds
+        row[5] = float(row[5].replace(' ', ''))  # Тпз
 
-    if row[5]>tend_max:
-        tend_max=row[5]
+        if row[5]>tend_max:
+            tend_max=row[5]
 
-    if row[4] < tmin_min:
-        tmin_min = row[4]
+        if row[4] < tmin_min:
+            tmin_min = row[4]
 
-    result += (row[4] * (row[6] * row[14] + row[7]*salary)) # Результат
-
-day=tend_max-tmin_min
-
-if day<365:
-    otvet=round(result)*bank
+    result += (row[4] * bank * (row[6] * row[14] + row[7]*salary)) # Результат
 
 print ('max дней  (tend_max) =', tend_max)
 print ('min дней  (tmin_min)=', tmin_min)
 print ('Итог дней', day)
 print('Стоимость проекта = ',otvet, 'рублей')
-
-
-
-
-
-
-
